@@ -1,0 +1,54 @@
+Sub abbr()
+'
+' Abbr Macro
+'
+'
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    
+    Dim str As String
+    str = Selection.Text
+    Dim TestArray() As String
+    TestArray() = Split(str, "(")
+    Dim title As String
+    title = TestArray(0)
+    Dim replacementText() As String
+    replacementText() = Split(TestArray(1), ")")
+    Dim abbr As String
+    abbr = replacementText(0)
+    
+    
+    With Selection.Find
+        .Text = title
+        .Replacement.Text = abbr + " "
+        .Forward = True
+        .Wrap = wdFindAsk
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+    
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    
+    Debug.Print title + "(" + abbr + ")"
+    
+    With Selection.Find
+        .Text = abbr + " " + "(" + abbr + ")"
+        .Replacement.Text = title + "(" + abbr + ")"
+        .Forward = True
+        .Wrap = wdFindAsk
+        .Format = False
+        .MatchCase = True
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+    
+End Sub
