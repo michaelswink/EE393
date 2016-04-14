@@ -1,0 +1,16 @@
+Sub AbstractMacro()
+'
+' AbstractMacro Macro
+'
+'
+    Selection.Font.Size = 9
+    Selection.Font.Bold = wdToggle
+    Selection.Font.Italic = wdToggle
+    Selection.Font.Bold = wdToggle
+    Selection.Font.Italic = wdToggle
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1
+    Selection.TypeText Text:="Abstract: "
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Selection.Font.Bold = wdToggle
+    Selection.Font.Italic = wdToggle
+End Sub
